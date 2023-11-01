@@ -1,5 +1,5 @@
 @php
- $imageOne= asset('frontend/assets/imgs/slider/slider-1.png')
+ $imageOne= asset('frontend/assets/imgs/slider/slider-1.png');
  $imageTwo= asset('frontend/assets/imgs/slider/slider-2.png')
 @endphp
 

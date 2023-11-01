@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VendorController;
@@ -52,5 +53,16 @@ Route::middleware(['auth','role:vendor'])->group(function () {
     Route::post("/vendor/profile/store",[VendorController::class,'VendorProfileStore'])->name('vendor.profile.store');
     Route::post("/vendor/update/password",[VendorController::class,'VendorUpdatePass'])->name('vendor.update.password');
 });
+
+
+//user middleware
+Route::middleware(['auth'])->group(function() {
+    
+    Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');
+    
+    
+    });
+
+
 Route::get('/admin/login',[AdminController::class,'AdminLogin'])->name('admin.login');
 Route::get('/vendor/login',[VendorController::class,'VendorLogin'])->name('vendor.login');
