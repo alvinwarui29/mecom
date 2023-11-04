@@ -90,5 +90,17 @@ class CategoryController extends Controller
 
     }
    }
+   public function DeleteCategory($id){
+        $category = Category::findorfail($id);
+        $img = $category->category_image;
+        unlink($img);
+        Category::findorfail($id)->delete();
+        $notification = array(
+            'message' => 'Category Deleted Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('all.category')->with($notification);
+
+   }
     
 }
