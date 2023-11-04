@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -72,6 +73,8 @@ Route::get('/vendor/login',[VendorController::class,'VendorLogin'])->name('vendo
 
 
 Route::middleware(['auth','role:admin'])->group(function() {
+
+    ///brand controller all routes
 Route::controller(BrandController::class)->group(function (){
     Route::get('/all/brand' , 'AllBrand')->name('all.brand');
     Route::get('/add/brand' , 'AddBrand')->name('add.brand');
@@ -80,4 +83,16 @@ Route::controller(BrandController::class)->group(function (){
     Route::post('/store/brand' , 'StoreBrand')->name('brand.store');
     Route::post('/update/brand' , 'UpdateBrand')->name('update.brand');
 });
+
+//category all routes
+Route::controller(CategoryController::class)->group(function (){
+    Route::get('/all/category' , 'AllCategory')->name('all.category');
+    Route::get('/add/category' , 'AddCategory')->name('add.category');
+    Route::get('/edit/category/{id}' , 'EditCategory')->name('edit.category');
+    Route::get('/delete/brand/{id}' , 'DeleteBrand')->name('delete.category');
+     Route::post('/store/category' , 'StoreCategory')->name('store.category');
+    Route::post('/update/category' , 'UpdateCategory')->name('update.category');
+});
+
+
 }); // End Middleware 
