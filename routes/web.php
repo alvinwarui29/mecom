@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,13 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+Route::get('/admin/login',[AdminController::class,'AdminLogin'])->name('admin.login');
+Route::get('/vendor/login',[VendorController::class,'VendorLogin'])->name('vendor.login');
+Route::get('/become/vendor', [VendorController::class, 'BecomeVendor'])->name('become.vendor');
+Route::post('/vendor/register', [VendorController::class, 'VendorRegister'])->name('vendor.register');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -69,8 +77,6 @@ Route::middleware(['auth'])->group(function() {
     });
 
 
-Route::get('/admin/login',[AdminController::class,'AdminLogin'])->name('admin.login');
-Route::get('/vendor/login',[VendorController::class,'VendorLogin'])->name('vendor.login');
 
 
 Route::middleware(['auth','role:admin'])->group(function() {
@@ -103,6 +109,27 @@ Route::controller(CategoryController::class)->group(function (){
     Route::get('/edit/subcategory/{id}' , 'EditSubCategory')->name('edit.subcategory');
     Route::post('/update/subcategory' , 'UpdateSubCategory')->name('update.subcategory');
     Route::get('/delete/subcategory/{id}' , 'DeleteSubCategory')->name('delete.subcategory');
+});
+
+//Admin contorller
+Route::controller(AdminController::class)->group(function () {
+
+    Route::get("/inactive/vendor",'InactiveVendor')->name('inactive.vendor');
+    Route::get("/active/vendor",'ActiveVendor')->name('active.vendor');
+    Route::get('/inactive/vendor/details/{id}' , 'InactiveVendorDetails')->name('inactive.vendor.details');
+    Route::get('/active/vendor/details/{id}' , 'ActiveVendorDetails')->name('active.vendor.details');
+    Route::post('/activate/vendor' , 'ActivateIncativeVvendor')->name('activate.inactive.vendor');
+    Route::post('/inactivate/vendor' , 'InActivateactiveVvendor')->name('inactivate.active.vendor');
+
+});
+
+
+//Product controller routes
+Route::controller(ProductController::class)->group(function(){
+    Route::get('/all/product' , 'AllProduct')->name('all.product');
+    Route::get('/add/product' , 'AddProduct')->name('add.product');
+
+
 });
 
 

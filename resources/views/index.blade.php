@@ -1,322 +1,305 @@
-@extends('dashboard') 
-@section('user')
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+@extends('vendor.vendor_dashboard')
+@section('vendor')
+
+@php
+	$id = Auth::user()->id;
+	$verdorId = App\Models\User::find($id);
+	$status = $verdorId->status; 
+@endphp
+ 
+<div class="page-content">
 
 
-  <div class="page-header breadcrumb-wrap">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> My Account
-                </div>
-            </div>
-        </div>
-        <div class="page-content pt-150 pb-150">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 m-auto">
-<div class="row">
-<div class="col-md-3">
-<div class="dashboard-menu">
-<ul class="nav flex-column" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#track-orders" role="tab" aria-controls="track-orders" aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="true"><i class="fi-rs-marker mr-10"></i>My Address</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="change-password-tab" data-bs-toggle="tab" href="#change-password" role="tab" aria-controls="change-password" aria-selected="true"><i class="fi-rs-user mr-10"></i>Change Password</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('user.logout') }}"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
-    </li>
-</ul>
-</div>
-</div>
-<div class="col-md-9">
-<div class="tab-content account dashboard-content pl-50">
-<div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="mb-0">Hello {{ Auth::user()->name }}</h3>
-            <br>
-              <img id="showImage" src="{{ (!empty($userData->photo)) ? url('upload/user_images/'.$userData->photo):url('upload/no_image.jpg') }}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
+                    @if($status === 'active')
+                    <h4>Vendor Account is <span class="text-success">Active</span> </h4>
+                    @else
+                    <h4>Vendor Account is <span class="text-danger">InActive</span> </h4>
+                    <p class="text-danger"><b> Plz wait admin will check and approve your account</b></p>
+                    @endif
+
+					<div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+						<div class="col">
+							<div class="card radius-10 bg-gradient-deepblue">
+							 <div class="card-body">
+								<div class="d-flex align-items-center">
+									<h5 class="mb-0 text-white">9526</h5>
+									<div class="ms-auto">
+                                        <i class='bx bx-cart fs-3 text-white'></i>
+									</div>
+								</div>
+								<div class="progress my-3 bg-light-transparent" style="height:3px;">
+									<div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="d-flex align-items-center text-white">
+									<p class="mb-0">Total Orders</p>
+									<p class="mb-0 ms-auto">+4.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+								</div>
+							</div>
+						  </div>
+						</div>
+						<div class="col">
+							<div class="card radius-10 bg-gradient-orange">
+							<div class="card-body">
+								<div class="d-flex align-items-center">
+									<h5 class="mb-0 text-white">$8323</h5>
+									<div class="ms-auto">
+                                        <i class='bx bx-dollar fs-3 text-white'></i>
+									</div>
+								</div>
+								<div class="progress my-3 bg-light-transparent" style="height:3px;">
+									<div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="d-flex align-items-center text-white">
+									<p class="mb-0">Total Revenue</p>
+									<p class="mb-0 ms-auto">+1.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+								</div>
+							</div>
+						  </div>
+						</div>
+						<div class="col">
+							<div class="card radius-10 bg-gradient-ohhappiness">
+							<div class="card-body">
+								<div class="d-flex align-items-center">
+									<h5 class="mb-0 text-white">6200</h5>
+									<div class="ms-auto">
+                                        <i class='bx bx-group fs-3 text-white'></i>
+									</div>
+								</div>
+								<div class="progress my-3 bg-light-transparent" style="height:3px;">
+									<div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="d-flex align-items-center text-white">
+									<p class="mb-0">Visitors</p>
+									<p class="mb-0 ms-auto">+5.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+								</div>
+							</div>
+						</div>
+						</div>
+						<div class="col">
+							<div class="card radius-10 bg-gradient-ibiza">
+							 <div class="card-body">
+								<div class="d-flex align-items-center">
+									<h5 class="mb-0 text-white">5630</h5>
+									<div class="ms-auto">
+                                        <i class='bx bx-envelope fs-3 text-white'></i>
+									</div>
+								</div>
+								<div class="progress my-3 bg-light-transparent" style="height:3px;">
+									<div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="d-flex align-items-center text-white">
+									<p class="mb-0">Messages</p>
+									<p class="mb-0 ms-auto">+2.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+								</div>
+							</div>
+						 </div>
+						</div>
+					</div><!--end row-->
+				
+			 
+ 
+
+  
 
 
-        </div>
-        <div class="card-body">
-            <p>
-                From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>,<br />
-                manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a>
-            </p>
-        </div>
-    </div>
-</div>
-<div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="mb-0">Your Orders</h3>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Order</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Total</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#1357</td>
-                            <td>March 45, 2020</td>
-                            <td>Processing</td>
-                            <td>$125.00 for 2 item</td>
-                            <td><a href="#" class="btn-small d-block">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>#2468</td>
-                            <td>June 29, 2020</td>
-                            <td>Completed</td>
-                            <td>$364.00 for 5 item</td>
-                            <td><a href="#" class="btn-small d-block">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>#2366</td>
-                            <td>August 02, 2020</td>
-                            <td>Completed</td>
-                            <td>$280.00 for 3 item</td>
-                            <td><a href="#" class="btn-small d-block">View</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="tab-pane fade" id="track-orders" role="tabpanel" aria-labelledby="track-orders-tab">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="mb-0">Orders tracking</h3>
-        </div>
-        <div class="card-body contact-from-area">
-            <p>To track your order please enter your OrderID in the box below and press "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
-            <div class="row">
-                <div class="col-lg-8">
-                    <form class="contact-form-style mt-30 mb-50" action="#" method="post">
-                        <div class="input-style mb-20">
-                            <label>Order ID</label>
-                            <input name="order-id" placeholder="Found in your order confirmation email" type="text" />
-                        </div>
-                        <div class="input-style mb-20">
-                            <label>Billing email</label>
-                            <input name="billing-email" placeholder="Email you used during checkout" type="email" />
-                        </div>
-                        <button class="submit submit-auto-width" type="submit">Track</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="card mb-3 mb-lg-0">
-                <div class="card-header">
-                    <h3 class="mb-0">Billing Address</h3>
-                </div>
-                <div class="card-body">
-                    <address>
-                        3522 Interstate<br />
-                        75 Business Spur,<br />
-                        Sault Ste. <br />Marie, MI 49783
-                    </address>
-                    <p>New York</p>
-                    <a href="#" class="btn-small">Edit</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">Shipping Address</h5>
-                </div>
-                <div class="card-body">
-                    <address>
-                        4299 Express Lane<br />
-                        Sarasota, <br />FL 34249 USA <br />Phone: 1.941.227.4444
-                    </address>
-                    <p>Sarasota</p>
-                    <a href="#" class="btn-small">Edit</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-<div class="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
-    <div class="card">
-        <div class="card-header">
-            <h5>Account Details</h5>
-        </div>
-        <div class="card-body">
-            
-            
-
-    <form method="post" action="{{ route('user.profile.store') }}" enctype="multipart/form-data" >
-            @csrf
-
-
-<div class="row">
-    <!-- <div class="form-group col-md-6">
-        <label>User Name <span class="required">*</span></label>
-        <input required="" class="form-control" name="username" type="text" value="{{ $userData->username }}" />
-    </div> -->
-    <div class="form-group col-md-12">
-        <label>Full Name <span class="required">*</span></label>
-        <input required="" class="form-control" name="name" value="{{ $userData->name }}" />
-    </div>
-    <div class="form-group col-md-12">
-        <label>Email <span class="required">*</span></label>
-        <input required="" class="form-control" name="email" type="text" value="{{ $userData->email }}" />
-    </div>
-    <div class="form-group col-md-12">
-        <label>Phone <span class="required">*</span></label>
-        <input required="" class="form-control" name="phone" type="text" value="{{ $userData->phone }}" />
-    </div>
-    <div class="form-group col-md-12">
-        <label>Address <span class="required">*</span></label>
-        <input required="" class="form-control" name="address" type="text" value="{{ $userData->address }}" />
-    </div>
-    <div class="form-group col-md-12">
-        <label>User Photo <span class="required">*</span></label>
-        <input class="form-control" name="photo" type="file"  id="image" />
-    </div>
-
-    <div class="row mb-3">
-				<div class="col-sm-3">
-					<h6 class="mb-0"> </h6>
+					  <div class="card radius-10">
+						<div class="card-body">
+							<div class="d-flex align-items-center">
+								<div>
+									<h5 class="mb-0">Orders Summary</h5>
+								</div>
+								<div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
+								</div>
+							</div>
+							<hr>
+							<div class="table-responsive">
+								<table class="table align-middle mb-0">
+									<thead class="table-light">
+										<tr>
+											<th>Order id</th>
+											<th>Product</th>
+											<th>Customer</th>
+											<th>Date</th>
+											<th>Price</th>
+											<th>Status</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+	<tr>
+		<td>#897656</td>
+		<td>
+			<div class="d-flex align-items-center">
+				<div class="recent-product-img">
+					<img src="{{ asset('adminbackend/assets/images/icons/chair.png') }}" alt="">
 				</div>
-				<div class="col-sm-9 text-secondary">
-					 <img id="showImage" src="{{ (!empty($userData->photo)) ? url('upload/user_images/'.$userData->photo):url('upload/no_image.jpg') }}" alt="user" style="width:100px; height: 100px;"  >
+				<div class="ms-2">
+					<h6 class="mb-1 font-14">Light Blue Chair</h6>
 				</div>
 			</div>
+		</td>
+		<td>Brooklyn Zeo</td>
+		<td>12 Jul 2020</td>
+		<td>$64.00</td>
+		<td>
+			<div class="badge rounded-pill bg-light-info text-info w-100">In Progress</div>
+		</td>
+		<td>
+			<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
+				<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>#987549</td>
+		<td>
+			<div class="d-flex align-items-center">
+				<div class="recent-product-img">
+					<img src="{{ asset('adminbackend/assets/images/icons/shoes.png') }}" alt="">
+				</div>
+				<div class="ms-2">
+					<h6 class="mb-1 font-14">Green Sport Shoes</h6>
+				</div>
+			</div>
+		</td>
+		<td>Martin Hughes</td>
+		<td>14 Jul 2020</td>
+		<td>$45.00</td>
+		<td>
+			<div class="badge rounded-pill bg-light-success text-success w-100">Completed</div>
+		</td>
+		<td>
+			<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
+				<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>#685749</td>
+		<td>
+			<div class="d-flex align-items-center">
+				<div class="recent-product-img">
+					<img src="{{ asset('adminbackend/assets/images/icons/headphones.png') }}" alt="">
+				</div>
+				<div class="ms-2">
+					<h6 class="mb-1 font-14">Red Headphone 07</h6>
+				</div>
+			</div>
+		</td>
+		<td>Shoan Stephen</td>
+		<td>15 Jul 2020</td>
+		<td>$67.00</td>
+		<td>
+			<div class="badge rounded-pill bg-light-danger text-danger w-100">Cancelled</div>
+		</td>
+		<td>
+			<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
+				<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>#887459</td>
+		<td>
+			<div class="d-flex align-items-center">
+				<div class="recent-product-img">
+					<img src="{{ asset('adminbackend/assets/images/icons/idea.png') }}" alt="">
+				</div>
+				<div class="ms-2">
+					<h6 class="mb-1 font-14">Mini Laptop Device</h6>
+				</div>
+			</div>
+		</td>
+		<td>Alister Campel</td>
+		<td>18 Jul 2020</td>
+		<td>$87.00</td>
+		<td>
+			<div class="badge rounded-pill bg-light-success text-success w-100">Completed</div>
+		</td>
+		<td>
+			<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
+				<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>#335428</td>
+		<td>
+			<div class="d-flex align-items-center">
+				<div class="recent-product-img">
+					<img src="{{ asset('adminbackend/assets/images/icons/user-interface.png') }}" alt="">
+				</div>
+				<div class="ms-2">
+					<h6 class="mb-1 font-14">Purple Mobile Phone</h6>
+				</div>
+			</div>
+		</td>
+		<td>Keate Medona</td>
+		<td>20 Jul 2020</td>
+		<td>$75.00</td>
+		<td>
+			<div class="badge rounded-pill bg-light-info text-info w-100">In Progress</div>
+		</td>
+		<td>
+			<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
+				<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>#224578</td>
+		<td>
+			<div class="d-flex align-items-center">
+				<div class="recent-product-img">
+					<img src="{{ asset('adminbackend/assets/images/icons/watch.png') }}" alt="">
+				</div>
+				<div class="ms-2">
+					<h6 class="mb-1 font-14">Smart Hand Watch</h6>
+				</div>
+			</div>
+		</td>
+		<td>Winslet Maya</td>
+		<td>22 Jul 2020</td>
+		<td>$80.00</td>
+		<td>
+			<div class="badge rounded-pill bg-light-danger text-danger w-100">Cancelled</div>
+		</td>
+		<td>
+			<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
+				<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>#447896</td>
+		<td>
+			<div class="d-flex align-items-center">
+				<div class="recent-product-img">
+					<img src="{{ asset('adminbackend/assets/images/icons/tshirt.png') }}" alt="">
+				</div>
+				<div class="ms-2">
+					<h6 class="mb-1 font-14">T-Shirt Blue</h6>
+				</div>
+			</div>
+		</td>
+		<td>Emy Jackson</td>
+		<td>28 Jul 2020</td>
+		<td>$96.00</td>
+		<td>
+			<div class="badge rounded-pill bg-light-success text-success w-100">Completed</div>
+		</td>
+		<td>
+			<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
+				<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+			</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 
-
-    
-    <div class="col-md-12">
-        <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
-    </div>
-</div>
-            </form>
-        </div>
-    </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="change-password" role="tabpanel" aria-labelledby="change-password-tab">
-    <div class="card">
-        <div class="card-header">
-            <h5>Change Password</h5>
-        </div>
-        <div class="card-body">
-
-
-
-        <form method="post" action="{{ route('user.update.password') }}" > 
-            @csrf
-
-         @if (session('status'))
-         <div class="alert alert-success" role="alert">
-                {{session('status')}}
-         </div>
-         @elseif(session('error'))
-         <div class="alert alert-danger" role="alert">
-            {{session('error')}}
-         </div>
-         @endif
-
-
-<div class="row">
-
-    <div class="form-group col-md-12">
-        <label>Old Password <span class="required">*</span></label>
-        <input  class="form-control @error('old_password') is-invalid @enderror"  name="old_password" type="password" id="old_password"    placeholder="Old Password"  />
-
-        @error('old_password')
-        <span class="text-danger">{{ $message }}</span>
-        @enderror
-    </div>
-
-      <div class="form-group col-md-12">
-        <label>New Password <span class="required">*</span></label>
-        <input  class="form-control @error('new_password') is-invalid @enderror"  name="new_password" type="password" id="new_password"   placeholder="New Password"  />
-
-        @error('new_password')
-        <span class="text-danger">{{ $message }}</span>
-        @enderror
-    </div>
-
-
-      <div class="form-group col-md-12">
-        <label>Confirm New Password <span class="required">*</span></label>
-        <input  class="form-control"  name="new_password_confirmation" type="password" id="new_password_confirmation"  placeholder="Confirm New Password"  /> 
-
-    </div>
-
-
-
-    <div class="col-md-12">
-        <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
-    </div>
-</div>
-            </form>
-        </div>
-    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-    
-                </div>
-            </div>
-        </div>
-
-
-
-        <script type="text/javascript">
-    $(document).ready(function(){
-        $('#image').change(function(e){
-            var reader = new FileReader();
-            reader.onload = function(e){
-                $('#showImage').attr('src',e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        });
-    });
-
-
-</script>
-
-
+			</div>
 
 @endsection
