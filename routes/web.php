@@ -109,6 +109,7 @@ Route::controller(CategoryController::class)->group(function (){
     Route::get('/edit/subcategory/{id}' , 'EditSubCategory')->name('edit.subcategory');
     Route::post('/update/subcategory' , 'UpdateSubCategory')->name('update.subcategory');
     Route::get('/delete/subcategory/{id}' , 'DeleteSubCategory')->name('delete.subcategory');
+    Route::get('/subcategory/ajax/{category_id}' , 'GetSubCategory');
 });
 
 //Admin contorller
