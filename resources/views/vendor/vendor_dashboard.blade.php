@@ -23,9 +23,13 @@
 	<link rel="stylesheet" href="{{ asset('adminbackend/assets/css/dark-theme.css') }}" />
 	<link rel="stylesheet" href="{{ asset('adminbackend/assets/css/semi-dark.css') }}" />
 	<link rel="stylesheet" href="{{ asset('adminbackend/assets/css/header-colors.css') }}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 	 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
+	 <!-- DataTable -->
+	<link href="{{ asset('adminbackend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+<!-- DataTable-->
 
 	<title>Vendor Dashboard</title>
 </head>
@@ -104,6 +108,30 @@
  }
  @endif 
 </script>
+<script src="{{ asset('adminbackend/assets/js/validate.min.js') }}"></script>
+
+<!--Datatable-->
+<script src="{{ asset('adminbackend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script>
+		$(document).ready(function() {
+			$('#example').DataTable();
+		  } );
+	</script>
+<!--Datatable-->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+ <script src="{{ asset('adminbackend/assets/js/code.js') }}"></script>
+
+ <script src="{{ asset('adminbackend/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
+
+ 	<script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+	</script>
+
+	<script>
+		tinymce.init({
+		  selector: '#mytextarea'
+		});
+	</script>
 
 
 </body>

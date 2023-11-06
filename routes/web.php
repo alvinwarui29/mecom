@@ -10,6 +10,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Controllers\Backend\VendorProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +65,24 @@ Route::middleware(['auth','role:vendor'])->group(function () {
     Route::get("/vendor/change/password",[VendorController::class,'VendorchangePass'])->name('vendor.change.password');
     Route::post("/vendor/profile/store",[VendorController::class,'VendorProfileStore'])->name('vendor.profile.store');
     Route::post("/vendor/update/password",[VendorController::class,'VendorUpdatePass'])->name('vendor.update.password');
+
+    Route::controller(VendorProductController::class)->group(function(){
+        Route::get('/vendor/all/product' , 'VendorAllProduct')->name('vendor.all.product');
+        Route::get('/vendor/add/product' , 'VendorAddProduct')->name('vendor.add.product');
+        Route::get('/vendor/subcategory/ajax/{category_id}' , 'VendorGetSubCategory');
+        Route::post('/vendor/store/product' , 'VendorStoreProduct')->name('vendor.store.product');
+        Route::get('/vendor/edit/product/{id}' , 'VendorEditProduct')->name('vendor.edit.product');
+        Route::post('/vendor/update/product' , 'VendorUpdateProduct')->name('vendor.update.product');
+        Route::post('/vendor/update/product/thambnail' , 'VendorUpdateProductThabnail')->name('vendor.update.product.thambnail');
+        Route::post('/vendor/update/product/multiimage' , 'VendorUpdateProductmultiImage')->name('vendor.update.product.multiimage');
+        Route::get('/vendor/product/multiimg/delete/{id}' , 'VendorMultiimgDelete')->name('vendor.product.multiimg.delete');
+        Route::get('/vendor/product/inactive/{id}' , 'VendorProductInactive')->name('vendor.product.inactive');
+        Route::get('/vendor/product/active/{id}' , 'VendorProductActive')->name('vendor.product.active');
+        Route::get('/vendor/delete/product/{id}' , 'VendorProductDelete')->name('vendor.delete.product');
+
+
+    });
+    
 });
 
 
