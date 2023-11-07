@@ -11,6 +11,9 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Backend\VendorProductController;
+use App\Http\Controllers\Backend\SliderController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -158,6 +161,18 @@ Route::controller(ProductController::class)->group(function(){
     Route::get('/product/inactive/{id}' , 'ProductInactive')->name('product.inactive');
     Route::get('/product/active/{id}' , 'ProductActive')->name('product.active');
     Route::get('/delete/product/{id}' , 'ProductDelete')->name('delete.product');
+});
+//slider controller routes
+Route::controller(SliderController::class)->group(function(){
+    Route::get('/all/slider' , 'AllSlider')->name('all.slider');
+    Route::get('/add/category' , 'AddCategory')->name('add.category');
+    Route::get('/add/slider' , 'AddSlider')->name('add.slider');
+    Route::post('/store/slider' , 'StoreSlider')->name('store.slider');
+    Route::get('/edit/slider/{id}' , 'EditSlider')->name('edit.slider');
+    Route::post('/update/slider' , 'UpdateSlider')->name('update.slider');
+    Route::get('/delete/slider/{id}' , 'DeleteSlider')->name('delete.slider');
+
+
 });
 
 
