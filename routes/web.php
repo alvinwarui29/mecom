@@ -166,7 +166,6 @@ Route::controller(ProductController::class)->group(function(){
 //slider controller routes
 Route::controller(SliderController::class)->group(function(){
     Route::get('/all/slider' , 'AllSlider')->name('all.slider');
-    Route::get('/add/category' , 'AddCategory')->name('add.category');
     Route::get('/add/slider' , 'AddSlider')->name('add.slider');
     Route::post('/store/slider' , 'StoreSlider')->name('store.slider');
     Route::get('/edit/slider/{id}' , 'EditSlider')->name('edit.slider');
@@ -177,7 +176,7 @@ Route::controller(SliderController::class)->group(function(){
 });
 Route::controller(BannerController::class)->group(function(){
     Route::get('/all/banner' , 'AllBanner')->name('all.banner');
-    Route::get('/add/slider' , 'AddSlider')->name('add.slider');
+    Route::get('/add/banner' , 'addBanner')->name('add.banner');
     Route::get('/add/banner' , 'AddBanner')->name('add.banner');
     Route::post('/store/banner' , 'StoreBanner')->name('store.banner');
     Route::get('/edit/banner/{id}' , 'EditBanner')->name('edit.banner');

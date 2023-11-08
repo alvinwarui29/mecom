@@ -24,7 +24,7 @@
     <!-- Modal -->
  
     <!-- Quick view -->
-  @include('frontend.body.quickview')
+    @include('frontend.body.quickview')
     <!-- Header  -->
 
   @include('frontend.body.header')
