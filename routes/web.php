@@ -14,7 +14,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
-
+use App\Http\Controllers\frontend\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -198,3 +198,11 @@ Route::controller(BannerController::class)->group(function(){
 
 });
 }); // End Middleware 
+
+
+//Cart category
+Route::controller(CartController::class)->group(function(){
+    Route::post('/cart/data/store/{id}','AddToCart')->name('cart.data.store');
+    Route::get('/product/mini/cart','MiniCart');
+    Route::get('/minicart/product/remove/{rowId}','RemoveMiniCart');
+});
