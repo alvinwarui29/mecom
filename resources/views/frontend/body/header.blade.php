@@ -297,7 +297,7 @@
                                     @endphp
                                     @foreach($categories as $item)
                                     <li>
-                                        <a href="#">{{$item->category_name}} <i class="fi-rs-angle-down"></i></a>
+                                        <a href="{{ url('product/category/'.$category->id.'/'.$category->category_slug) }}">{{$item->category_name}} <i class="fi-rs-angle-down"></i></a>
                                         @php
                                         $subcategories = App\Models\Subcategory::where('category_id', $item->id)->orderBy('subcategory_name')->get();
                                         @endphp
