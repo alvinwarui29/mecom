@@ -36,9 +36,31 @@ class IndexController extends Controller
 
         $vendor = User::findOrFail($id);
         $vproduct = Product::where('vendor_id',$id)->get();
-        return view('frontend.vendor.vendor_details',compact('vendor','vproduct'));
+        $breadcat = Category::where('id',$id)->first();
+
+        return view('frontend.product.category_view',compact('products','categories','breadcat'));
 
      } // End Method 
+
+
+     public function ProductViewAjax($id){
+
+        $product = Product::with('category','brand')->findOrFail($id);
+        $color = $product->product_color;
+        $product_color = explode(',', $color);
+
+        $size = $product->product_size;
+        $product_size = explode(',', $size);
+
+        return response()->json(array(
+
+         'product' => $product,
+         'color' => $product_color,
+         'size' => $product_size,
+
+        ));
+
+     }// End Method 
 
      
      public function CatWiseProduct(Request $request,$id,$slug){
@@ -49,6 +71,17 @@ class IndexController extends Controller
   
        }// End Method 
 
+       public function SubCatWiseProduct(Request $request,$id,$slug){
+        $products = Product::where('status',1)->where('subcategory_id',$id)->orderBy('id','DESC')->get();
+        $categories = Category::orderBy('category_name','ASC')->get();
+  
+        $breadsubcat = SubCategory::where('id',$id)->first();
+  
+        $newProduct = Product::orderBy('id','DESC')->limit(3)->get();
+  
+        return view('frontend.product.sub_category_view',compact('products','categories','breadsubcat','newProduct'));
+  
+       }// End Method 
      public function VendorAll(){
 
         $vendors = User::where('status','active')->where('role','vendor')->orderBy('id','DESC')->get();

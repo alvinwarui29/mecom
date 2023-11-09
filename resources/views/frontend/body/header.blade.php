@@ -297,13 +297,13 @@
                                     @endphp
                                     @foreach($categories as $item)
                                     <li>
-                                        <a href="{{ url('product/category/'.$category->id.'/'.$category->category_slug) }}">{{$item->category_name}} <i class="fi-rs-angle-down"></i></a>
+                                        <a href="{{ url('product/category/'.$item->id.'/'.$item->category_slug) }}">{{$item->category_name}} <i class="fi-rs-angle-down"></i></a>
                                         @php
                                         $subcategories = App\Models\Subcategory::where('category_id', $item->id)->orderBy('subcategory_name')->get();
                                         @endphp
                                         <ul class="sub-menu">
                                             @foreach($subcategories as $sub)
-                                            <li><a href="vendors-grid.html">{{$sub->subcategory_name}}</a></li>
+                                            <li><a href="{{ url('product/subcategory/'.$sub->id.'/'.$sub->subcategory_slug) }}">{{$sub->subcategory_name}}</a></li>
                                             @endforeach
                                         </ul>
                                     </li>
