@@ -16,7 +16,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
-
+use App\Http\Controllers\User\CompareController;
 
 
 /*
@@ -37,6 +37,14 @@ Route::get('/', function () {
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+
+ // Compare All Route 
+ Route::controller(CompareController::class)->group(function(){
+    Route::get('/compare' , 'AllCompare')->name('compare');
+    Route::get('/get-compare-product' , 'GetCompareProduct');
+    Route::get('/compare-remove/{id}' , 'CompareRemove'); 
+
+}); 
 
 
 Route::get('/', [IndexController::class, 'Index']);
@@ -209,7 +217,7 @@ Route::controller(CartController::class)->group(function(){
     Route::get('/product/mini/cart','MiniCart');
     Route::get('/minicart/product/remove/{rowId}','RemoveMiniCart');
 });
-
+Route::post('/add-to-compare/{product_id}', [CompareController::class, 'AddToCompare']);
 
 Route::middleware(['auth','role:user'])->group(function() {
     
