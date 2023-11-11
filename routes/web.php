@@ -15,6 +15,9 @@ use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\User\WishlistController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -206,3 +209,19 @@ Route::controller(CartController::class)->group(function(){
     Route::get('/product/mini/cart','MiniCart');
     Route::get('/minicart/product/remove/{rowId}','RemoveMiniCart');
 });
+
+
+Route::middleware(['auth','role:user'])->group(function() {
+    
+    // Wishlist All Route 
+    Route::controller(WishlistController::class)->group(function(){
+        Route::get('/wishlist' , 'AllWishlist')->name('wishlist');
+        Route::post('/add-to-wishlist/{product_id}', 'AddToWishList');
+        Route::get('/get-wishlist-product' , 'GetWishlistProduct');
+        Route::get('/wishlist-remove/{id}' , 'WishlistRemove');
+   
+   
+   }); 
+   
+   
+   }); // end group middleware
