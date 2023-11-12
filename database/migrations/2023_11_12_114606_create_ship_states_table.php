@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('ship_states', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('division_id');
+            $table->unsignedBigInteger('district_id');
+            $table->string('state_name');
             $table->timestamps();
         });
     }
