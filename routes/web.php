@@ -46,6 +46,15 @@ Route::get('/', function () {
 
 }); 
 
+ // Cart All Route 
+ Route::controller(CartController::class)->group(function(){
+    Route::get('/mycart' , 'MyCart')->name('mycart');
+    Route::get('/get-cart-product' , 'GetCartProduct');
+    Route::get('/cart-remove/{rowId}' , 'CartRemove');
+    Route::get('/cart-decrement/{rowId}' , 'CartDecrement');
+
+}); 
+
 
 Route::get('/', [IndexController::class, 'Index']);
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
