@@ -43,7 +43,7 @@ Route::get('/', function () {
     Route::get('/compare' , 'AllCompare')->name('compare');
     Route::get('/get-compare-product' , 'GetCompareProduct');
     Route::get('/compare-remove/{id}' , 'CompareRemove'); 
-
+    Route::get('/cart-increment/{rowId}' , 'CartIncrement');
 }); 
 
  // Cart All Route 
