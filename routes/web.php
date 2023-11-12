@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CompareController;
+use App\Http\Controllers\Backend\CouponController;
 
 
 /*
@@ -82,6 +83,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+
 //admin middleware
 Route::middleware(['auth','role:admin'])->group(function () {
 
@@ -91,6 +93,16 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::get("/admin/change/password",[AdminController::class,'AdminChangePassword'])->name('admin.change.password');
     Route::post("/admin/profile/store",[AdminController::class,'AdminProfileStore'])->name('admin.profile.store');
     Route::post("/admin/update/password",[AdminController::class,'AdminUpdatePass'])->name('change.password');
+
+    Route::controller(CouponController::class)->group(function(){
+        Route::get('/all/coupon' , 'AllCoupon')->name('all.coupon');
+        Route::get('/add/coupon' , 'AddCoupon')->name('add.coupon');
+        Route::post('/store/coupon' , 'StoreCoupon')->name('store.coupon');
+        Route::get('/edit/coupon/{id}' , 'EditCoupon')->name('edit.coupon');
+        Route::post('/update/coupon' , 'UpdateCoupon')->name('update.coupon');
+        Route::get('/delete/coupon/{id}' , 'DeleteCoupon')->name('delete.coupon');
+    
+});
 });
 
 //vendor middleware
@@ -120,6 +132,7 @@ Route::middleware(['auth','role:vendor'])->group(function () {
 
     });
     
+  
 });
 
 
