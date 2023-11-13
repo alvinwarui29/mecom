@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -31,6 +32,15 @@ use App\Http\Controllers\Backend\ShippingAreaController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+/// Frontend Coupon Option
+Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
+Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
+Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
+
+
+
+
 
 Route::get('/', function () {
     return view('frontend.index');
@@ -178,6 +188,14 @@ Route::middleware(['auth'])->group(function() {
     
     });
 
+    Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+
+    Route::controller(CheckoutController::class)->group(function(){
+        Route::get('/district-get/ajax/{division_id}' , 'DistrictGetAjax');
+        Route::get('/state-get/ajax/{district_id}' , 'StateGetAjax');
+        Route::post('/checkout/store' , 'CheckoutStore')->name('checkout.store');
+    
+    }); 
 
 
 

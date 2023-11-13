@@ -186,7 +186,7 @@ public function StoreDistrict(Request $request){
     }// End Method 
     public function EditState($id){
         $division = ShipDivision::orderBy('division_name','ASC')->get();
-        $district = ShipDistricts::orderBy('district_name','ASC')->get();
+        $district = ShipDistrict::orderBy('district_name','ASC')->get();
         $state = ShipState::findOrFail($id);
          return view('backend.ship.state.state_edit',compact('division','district','state'));
     }// End Method 
